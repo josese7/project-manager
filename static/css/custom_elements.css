@@ -1,0 +1,13 @@
+.buttons-container a {
+    font-weight: bold;
+    background: #bfbec7;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+    clear: both;
+    margin: 0 0 10px;
+}
+.buttons-container input {
+    float: none;
+}

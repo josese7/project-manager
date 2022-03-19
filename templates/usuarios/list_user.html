@@ -1,0 +1,48 @@
+{% extends "base.html"%}
+
+{% block title %} Usuarios {%endblock%}
+
+{% block content%}
+
+<table class="table table-sm scrolltable" width="100%">
+    <thead class="thead-dark thead">
+        <tr>
+            <th width="10%">ID</th>
+            <th width="25%">Username</th>
+            <th width="27%">Nombre</th>
+            <th width="27%">Apodo</th>
+            <th width="8%">Acciones</th>
+            <th width="3%">
+            {% comment %}     {% if 'Crear Roles' in permisos %}
+                    <a href="/roles/create/"><i class="fas fa-plus-square"></i></a>
+                {% endif     %} {% endcomment %}
+            </th>
+        </tr>
+    </thead>
+    <tbody class="tbody">
+        {% for usuario in object_list %}
+            <tr>
+                <td width="10%">{{ usuario.pk }}</td>
+                <td width="25%">{{ usuario }}</td>
+                <td width="27%">{{ usuario.first_name}}</td>
+                <td width="27%">{{ usuario.last_name}}</td>
+                <td id="acciones" width="8%">
+                    {% comment %} <a href="{% url 'ver_rol' rol.pk %}"><i class="fas fa-eye"></i></a>
+                    {% if 'Modificar Roles' in permisos %}
+                    <a href="{% url 'update_rol' rol.pk %}"><i class="fas fa-edit"></i></a>
+                    {% endif %} {% endcomment %}
+                    <div class="">
+                        <a href="{% url 'update_user' usuario.pk %}">Editar<i class="fas fa-edit"></i></a>
+                        <a href="{% url 'delete_user' usuario.pk %}">Eliminar<i class="fas fa-delete"></i></a>
+                        <a href="{% url 'detail_user' usuario.pk %}">Ver<i class="fas fa-delete"></i></a>
+                    </div>
+                    
+                </td>
+                <td width="3%"></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{%endblock%}
