@@ -11,3 +11,8 @@
 .buttons-container input {
     float: none;
 }
+
+.buttons-container a.module-element{
+    background: #6558db;
+    text-decoration: none;
+}

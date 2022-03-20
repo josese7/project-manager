@@ -6,15 +6,12 @@
 
     <img source=""/>
     <h1>Seguridad</h1>
-    <div class="button-home">
-        <button type="button">
-          Usuarios 
-        </buttton>
-        <button type="button">
-          Roles
-        </buttton>
+    <div class="buttons-container">
+      
 
-    </div>
+      <a class="module-element" href="{% url "list_users"%}"> Usuarios</a>
+      <a class="module-element" href="{% url "list_rol"%}"> Roles</a>
+  </div>
 
 
 {%endblock%}

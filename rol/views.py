@@ -13,14 +13,22 @@ from .forms import *
 @method_decorator(login_required, name='dispatch')
 class ListRolView(ListView):
     model= Rol
-    template_name= 'rol/list_rol.html'
+    template_name= 'roles/list_rol.html'
+
+@method_decorator(login_required, name='dispatch')
+class DetailRolView(LoginRequiredMixin, DetailView):
+    """
+    Clase de la vista de los detalles de un Usuario
+    """
+    model = Rol
+    template_name = 'roles/detail_rol.html'
 
 @method_decorator(login_required, name='dispatch')
 class RolListView2(LoginRequiredMixin, ListView):
     """
     Clase de la vista de la lista de Roles
     """
-    template_name = 'rol/list_rol.html'
+    template_name = 'roles/list_rol.html'
     queryset = Rol.objects.all()
 
 
@@ -29,9 +37,9 @@ class CreateRolView( LoginRequiredMixin, CreateView):
     """
     Clase de la vista para la creacion de un Usuario
     """
-    template_name = 'rol/create_rol.html'
+    template_name = 'roles/create_rol.html'
     model = Rol
-    success_url = '/security/list/'
+    success_url = '/security/roles/'
     form_class = RolForm
     success_message = 'Se ha creado el rol'
 
@@ -40,14 +48,14 @@ class UpdateRolView( LoginRequiredMixin, UpdateView):
     """
     Clase de la vista para la creacion de un Usuario
     """
-    template_name = 'rol/update_rol.html'
+    template_name = 'roles/update_rol.html'
     model = Rol
-    success_url = '/security/list/'
+    success_url = '/security/roles/'
     form_class = RolForm
     success_message = 'Se ha modificado el Rol'
 
 @method_decorator(login_required, name='dispatch')
 class DeleteRolView( LoginRequiredMixin, DeleteView):
     model= Rol
-    success_url= '/security/list'
-    template_name= 'rol/delete_rol.html'
+    success_url= '/security/roles/'
+    template_name= 'roles/delete_rol.html'

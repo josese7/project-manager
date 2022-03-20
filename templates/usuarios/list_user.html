@@ -13,9 +13,9 @@
             <th width="27%">Apodo</th>
             <th width="8%">Acciones</th>
             <th width="3%">
-            {% comment %}     {% if 'Crear Roles' in permisos %}
-                    <a href="/roles/create/"><i class="fas fa-plus-square"></i></a>
-                {% endif     %} {% endcomment %}
+          
+                    <a href="{% url 'create_user'%}"><i class="fas fa-plus-square"></i></a>
+              
             </th>
         </tr>
     </thead>

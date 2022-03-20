@@ -6,7 +6,7 @@ from usuarios.views import UserListView, CreateUserView, UpdateUserView, DeleteU
 urlpatterns = [
     
     path('', UserListView.as_view(), name="list_users"),
-    path('add/', CreateUserView.as_view(), name='create-user'),
+    path('add/', CreateUserView.as_view(), name='create_user'),
     path('detail/<int:pk>/', DetailUserView.as_view(), name='detail_user'),
     path('edit/<int:pk>/', UpdateUserView.as_view(), name='update_user'),
     path('delete/<int:pk>/', DeleteUserView.as_view(), name='delete_user'),
