@@ -30,7 +30,7 @@ class CreateUserView( LoginRequiredMixin, CreateView):
     """
     template_name = 'usuarios/create_user.html'
     model = Usuario
-    success_url = '/usuarios/list/'
+    success_url = 'security/usuarios/'
     form_class = CreateUserForm
     success_message = 'Se ha creado el usuario'
 
@@ -41,12 +41,12 @@ class UpdateUserView( LoginRequiredMixin, UpdateView):
     """
     template_name = 'usuarios/update_user.html'
     model = Usuario
-    success_url = '/usuarios/list/'
+    success_url = 'security/usuarios/'
     form_class = UpdateUserForm
     success_message = 'Se ha modificado el usuario'
 
 @method_decorator(login_required, name='dispatch')
 class DeleteUserView( LoginRequiredMixin, DeleteView):
     model= Usuario
-    success_url= '/usuarios/list'
+    success_url= 'security/usuarios/'
     template_name= 'usuarios/delete_user.html'

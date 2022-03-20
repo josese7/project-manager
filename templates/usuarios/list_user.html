@@ -31,10 +31,10 @@
                     {% if 'Modificar Roles' in permisos %}
                     <a href="{% url 'update_rol' rol.pk %}"><i class="fas fa-edit"></i></a>
                     {% endif %} {% endcomment %}
-                    <div class="">
-                        <a href="{% url 'update_user' usuario.pk %}">Editar<i class="fas fa-edit"></i></a>
-                        <a href="{% url 'delete_user' usuario.pk %}">Eliminar<i class="fas fa-delete"></i></a>
-                        <a href="{% url 'detail_user' usuario.pk %}">Ver<i class="fas fa-delete"></i></a>
+                    <div class="action-container">
+                        <a href="{% url 'update_user' usuario.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{% url 'delete_user' usuario.pk %}"><i class="fa-regular fa-trash-can"></i></a>
+                        <a href="{% url 'detail_user' usuario.pk %}"><i class="fa-regular fa-eye"></i></a>
                     </div>
                     
                 </td>
