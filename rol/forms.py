@@ -1,5 +1,5 @@
 from django import forms
-from .models import Rol
+from .models import Rol, Permiso
 
 class RolForm(forms.ModelForm):
     """
@@ -15,4 +15,20 @@ class RolForm(forms.ModelForm):
                   'descripcion',
                   'permisos',
                   )
-    
+        widgets = {
+            'permisos': forms.CheckboxSelectMultiple(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        """
+        Constructor del formulario
+        :param args: argumentos para inicializacion
+        :param kwargs: diccionario de datos adicionales para inicializacion
+        """
+        super(RolForm, self).__init__(*args, **kwargs)
+        permisos_all = Permiso.objects.all()
+        p = self.fields['permisos'].widget
+        permisos = []
+        for permiso in permisos_all:
+            permisos.append((permiso.id, permiso.nombre))
+        p.choices = permisos
