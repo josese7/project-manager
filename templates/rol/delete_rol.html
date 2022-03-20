@@ -1,0 +1,23 @@
+{%extends "base.html"%}
+
+{% block title %} Eliminar  {%endblock%}
+
+{% block content%}
+<div class="main">
+    <!-- Create a Form -->
+    <form method="POST">
+        <!-- Security token by Django -->
+        {% csrf_token %}
+        
+        <h3>
+            ¿ Quieres eliminar este rol? ?
+        </h3>
+        <div class="buttons-container">
+            <input type="submit" value="Eliminar" />
+
+            <a href="{% url 'list_rol'%}"> Cancelar</a>
+        </div>
+        
+    </form>
+</div>
+{% endblock content%}

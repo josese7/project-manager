@@ -1,18 +1,53 @@
-from django.views.generic import ListView, CreateView, UpdateView, DetailView
-""" from rol.forms import * """
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from rol.models import Rol
 
+from rol.models import Rol
+from .forms import *
+
+
+# Create your views here.
+@method_decorator(login_required, name='dispatch')
+class ListRolView(ListView):
+    model= Rol
+    template_name= 'rol/list_rol.html'
 
 @method_decorator(login_required, name='dispatch')
-class RolListView(LoginRequiredMixin, ListView):
+class RolListView2(LoginRequiredMixin, ListView):
     """
     Clase de la vista de la lista de Roles
     """
     template_name = 'rol/list_rol.html'
-    model = Rol
     queryset = Rol.objects.all()
+
+
+@method_decorator(login_required, name='dispatch')
+class CreateRolView( LoginRequiredMixin, CreateView):
+    """
+    Clase de la vista para la creacion de un Usuario
+    """
+    template_name = 'rol/create_rol.html'
+    model = Rol
+    success_url = '/security/list/'
+    form_class = RolForm
+    success_message = 'Se ha creado el rol'
+
+@method_decorator(login_required, name='dispatch')
+class UpdateRolView( LoginRequiredMixin, UpdateView):
+    """
+    Clase de la vista para la creacion de un Usuario
+    """
+    template_name = 'rol/update_rol.html'
+    model = Rol
+    success_url = '/security/list/'
+    form_class = RolForm
+    success_message = 'Se ha modificado el Rol'
+
+@method_decorator(login_required, name='dispatch')
+class DeleteRolView( LoginRequiredMixin, DeleteView):
+    model= Rol
+    success_url= '/security/list'
+    template_name= 'rol/delete_rol.html'

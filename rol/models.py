@@ -25,7 +25,6 @@ class Permiso(models.Model):
     tipo 1 = Permisos de administracion
     tipo 2 = Permisos de Proyecto
     """
-    tipo = models.CharField(max_length=1, choices=tipos_permiso, default='2')
 
     def __str__(self):
         """
