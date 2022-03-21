@@ -7,17 +7,21 @@
     <img source=""/>
     <h1>Bienvenido!</h1>
     <div class="buttons-container">
+        {% if 'Seguridad' in permisos %}
         <a href="{% url 'security'%}">
           Modulo de Seguridad  
         </a>
+        {% endif %}
+        {% if 'Desarrollo' in permisos %}
         <button type="button">
             Modulo de Desarrollo  
         </buttton>
-
+        {% endif %}
+        {% if 'Proyecto' in permisos %}
         <button type="button">
             Modulo de Proyecto 
         </buttton
-        
+        {% endif %}
 
     </div>
 

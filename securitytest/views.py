@@ -16,6 +16,6 @@ class SecurityView(TemplateView):
         return self.render_to_response(self.get_context_data(permisos=permisos))
 
     def get_context_data(self, **kwargs):
-        context = super(SecurityView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         return context
