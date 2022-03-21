@@ -2,6 +2,7 @@ from django.db import models
 
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from rol.models import *
 
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -57,7 +58,7 @@ class Usuario(AbstractBaseUser):
     telefono= models.CharField(max_length=50, null=True, blank=True)
     direccion= models.CharField(max_length=200, null=True, blank=True)
     descripcion= models.TextField(null=True, blank=True)
-
+    roles = models.ManyToManyField('rol.Rol', blank=False)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
     objects = UsuarioManager()
@@ -75,3 +76,18 @@ class Usuario(AbstractBaseUser):
 	# Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
 	    return True
+    def get_permisos(self):
+        permisos = []
+        roles = []
+        permisos_list =[]
+        if self.is_superuser:
+            for permiso in Permiso.objects.all():
+                permisos_list.append(permiso.nombre)
+        else:
+            for rol in self.roles.all():
+                p = Permiso.objects.get(pk=rol.pk)
+                for permiso in p:
+                    permisos.append(permiso.nombre)
+            
+            permisos_list= list(set(permisos))
+        return permisos_list

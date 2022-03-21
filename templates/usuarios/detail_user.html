@@ -17,10 +17,10 @@
             <li>Teléfono: {% if object.telefono %}{{ object.telefono }}{% endif %}</li>
             <li>Direccion: {% if object.direccion %}{{ object.direccion }}{% endif %}</li>
             <li>Descripcion: {% if object.descripcion %}{{ object.descripcion }}{% endif %}</li>
-            <li>Permisos:</li>
+            <li>Roles:</li>
             <div class="container" style="margin-left: 50px">
-                {% for permiso in object.permisos.all %}
-                    <li>{{ permiso }}</li>
+                {% for rol in object.roles.all %}
+                    <li>{{ rol }}</li>
                 {% endfor %}
             </div>
         </div>

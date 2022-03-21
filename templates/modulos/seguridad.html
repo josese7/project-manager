@@ -1,9 +1,10 @@
+
 {% extends "base.html"%}
 
 {% block title %} Home {%endblock%}
 
 {% block content%}
-
+{% if 'Seguridad' in permisos %}
     <img source=""/>
     <h1>Seguridad</h1>
     <div class="buttons-container">
@@ -12,6 +13,9 @@
       <a class="module-element" href="{% url "list_users"%}"> Usuarios</a>
       <a class="module-element" href="{% url "list_rol"%}"> Roles</a>
   </div>
+{% else %}
 
 
+{% endif%}
+  
 {%endblock%}

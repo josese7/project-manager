@@ -1,9 +1,10 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
+from securitytest.views import SecurityView
 
 urlpatterns = [
     
-    path('', TemplateView.as_view(template_name="modulos/seguridad.html"), name="security"),
+    path('', SecurityView.as_view(), name="security"),
     path('roles/', include('rol.urls')),
     path('usuarios/', include('usuarios.urls')),
     

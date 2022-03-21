@@ -20,10 +20,12 @@ class CreateUserForm(forms.ModelForm):
                   'telefono',
                   'direccion',
                   'descripcion',
+                  'roles',
                   'password'
                   )
         widgets = {
-            'password': forms.PasswordInput()
+            'password': forms.PasswordInput(),
+            'roles': forms.CheckboxSelectMultiple(),
         }
 
 class UpdateUserForm(forms.ModelForm):
@@ -44,7 +46,12 @@ class UpdateUserForm(forms.ModelForm):
                   'ci',
                   'telefono',
                   'direccion',
-                  'descripcion'
+                  'descripcion',
+                  'roles'
                   )
+        widgets = {
+            'password': forms.PasswordInput(),
+            'roles': forms.CheckboxSelectMultiple(),
+        }
 
     

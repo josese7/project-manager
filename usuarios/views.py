@@ -14,6 +14,15 @@ from usuarios.models import Usuario
 class UserListView(ListView):
     model= Usuario
     template_name= 'usuarios/list_user.html'
+    def get(self, request, *args, **kwargs):
+        self.object_list = Usuario.objects.all()
+        permisos = request.user.get_permisos()
+        return self.render_to_response(self.get_context_data(permisos=permisos))
+
+    def get_context_data(self, **kwargs):
+        context = super(UserListView, self).get_context_data(**kwargs)
+
+        return context
 
 @method_decorator(login_required, name='dispatch')
 class DetailUserView(LoginRequiredMixin, DetailView):
@@ -22,7 +31,18 @@ class DetailUserView(LoginRequiredMixin, DetailView):
     """
     model = Usuario
     template_name = 'usuarios/detail_user.html'
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        permisos = request.user.get_permisos()
+        return self.render_to_response(self.get_context_data(permisos=permisos))
 
+    def get_context_data(self, **kwargs):
+        context = super(DetailUserView, self).get_context_data(**kwargs)
+
+        return context
+    def get_object(self, queryset=None):
+        return Usuario.objects.get(pk=self.kwargs['pk'])
+    
 @method_decorator(login_required, name='dispatch')
 class CreateUserView( LoginRequiredMixin, CreateView):
     """
@@ -30,9 +50,10 @@ class CreateUserView( LoginRequiredMixin, CreateView):
     """
     template_name = 'usuarios/create_user.html'
     model = Usuario
-    success_url = 'security/usuarios/'
+    success_url = '/security/usuarios/'
     form_class = CreateUserForm
     success_message = 'Se ha creado el usuario'
+
 
 @method_decorator(login_required, name='dispatch')
 class UpdateUserView( LoginRequiredMixin, UpdateView):
@@ -41,12 +62,12 @@ class UpdateUserView( LoginRequiredMixin, UpdateView):
     """
     template_name = 'usuarios/update_user.html'
     model = Usuario
-    success_url = 'security/usuarios/'
+    success_url = '/security/usuarios/'
     form_class = UpdateUserForm
     success_message = 'Se ha modificado el usuario'
 
 @method_decorator(login_required, name='dispatch')
 class DeleteUserView( LoginRequiredMixin, DeleteView):
     model= Usuario
-    success_url= 'security/usuarios/'
+    success_url= '/security/usuarios/'
     template_name= 'usuarios/delete_user.html'
