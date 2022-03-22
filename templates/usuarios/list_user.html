@@ -3,7 +3,7 @@
 {% block title %} Usuarios {%endblock%}
 
 {% block content%}
-
+{% if 'Seguridad' in permisos %}
 <table class="table table-sm scrolltable" width="100%">
     <thead class="thead-dark thead">
         <tr>
@@ -43,6 +43,10 @@
         {% endfor %}
     </tbody>
 </table>
+{%else%}
+Acceso denegado
 
+{% endif %}
 
 {%endblock%}
+

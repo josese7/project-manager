@@ -10,12 +10,14 @@ from django.views.generic.base import TemplateView
 class SecurityView(TemplateView):
 
     template_name = 'modulos/seguridad.html'
-    def get(self, request, *args, **kwargs):
-
-        permisos = request.user.get_permisos()
-        return self.render_to_response(self.get_context_data(permisos=permisos))
-
+    
     def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+        
+        
         context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
 
         return context

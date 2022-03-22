@@ -13,14 +13,14 @@
         </a>
         {% endif %}
         {% if 'Desarrollo' in permisos %}
-        <button type="button">
+        <a href="{% url 'security'%}">
             Modulo de Desarrollo  
-        </buttton>
+          </a>
         {% endif %}
         {% if 'Proyecto' in permisos %}
-        <button type="button">
-            Modulo de Proyecto 
-        </buttton
+        <a href="{% url 'security'%}">
+            Modulo de Proyecto  
+          </a>
         {% endif %}
 
     </div>

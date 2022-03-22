@@ -14,13 +14,13 @@ from usuarios.models import Usuario
 class UserListView(ListView):
     model= Usuario
     template_name= 'usuarios/list_user.html'
-    def get(self, request, *args, **kwargs):
-        self.object_list = Usuario.objects.all()
-        permisos = request.user.get_permisos()
-        return self.render_to_response(self.get_context_data(permisos=permisos))
-
     def get_context_data(self, **kwargs):
-        context = super(UserListView, self).get_context_data(**kwargs)
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
 
         return context
 
@@ -53,6 +53,16 @@ class CreateUserView( LoginRequiredMixin, CreateView):
     success_url = '/security/usuarios/'
     form_class = CreateUserForm
     success_message = 'Se ha creado el usuario'
+
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+
+        return context
 
 
 @method_decorator(login_required, name='dispatch')

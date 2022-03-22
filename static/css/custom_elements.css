@@ -6,7 +6,8 @@
     font-size: 14px;
     text-transform: uppercase;
     clear: both;
-    margin: 0 0 10px;
+    margin: 5px;
+    text-decoration: none;
 }
 .buttons-container input {
     float: none;

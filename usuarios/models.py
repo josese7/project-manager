@@ -83,11 +83,13 @@ class Usuario(AbstractBaseUser):
         if self.is_superuser:
             for permiso in Permiso.objects.all():
                 permisos_list.append(permiso.nombre)
-        """ else:
+        else:
             for rol in self.roles.all():
-               p = Permiso.objects.get(rol=rol.pk)
+                p = rol.permisos.all()
                 for permiso in p:
                     permisos.append(permiso.nombre)
             
-            permisos_list= list(set(permisos)) """
-        return 'Seguridad'
+            permisos_list= list(set(permisos))
+        
+        print(permisos_list)
+        return permisos_list
