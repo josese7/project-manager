@@ -8,10 +8,14 @@
     </div>
     <div class="register">
         <div class="container form-container">
+            {% if 'Seguridad' in permisos %}
             <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p}}
                 <button type="submit" class="btn submit-btn">Guardar</button>
+            {% else %}
+            Accseo denegado.
+            {% endif%}
             </form>
         </div>
         <hr>

@@ -31,17 +31,15 @@ class DetailUserView(LoginRequiredMixin, DetailView):
     """
     model = Usuario
     template_name = 'usuarios/detail_user.html'
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        permisos = request.user.get_permisos()
-        return self.render_to_response(self.get_context_data(permisos=permisos))
-
     def get_context_data(self, **kwargs):
-        context = super(DetailUserView, self).get_context_data(**kwargs)
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
 
         return context
-    def get_object(self, queryset=None):
-        return Usuario.objects.get(pk=self.kwargs['pk'])
     
 @method_decorator(login_required, name='dispatch')
 class CreateUserView( LoginRequiredMixin, CreateView):
@@ -76,8 +74,28 @@ class UpdateUserView( LoginRequiredMixin, UpdateView):
     form_class = UpdateUserForm
     success_message = 'Se ha modificado el usuario'
 
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+
+        return context
+
 @method_decorator(login_required, name='dispatch')
 class DeleteUserView( LoginRequiredMixin, DeleteView):
     model= Usuario
     success_url= '/security/usuarios/'
     template_name= 'usuarios/delete_user.html'
+
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+
+        return context

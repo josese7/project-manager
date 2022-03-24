@@ -1,4 +1,5 @@
 {%include 'base.html'%}
+{% if 'Seguridad' in permisos%}
 <html>
 <body>
 <div class="container">
@@ -19,3 +20,6 @@
 </div>
 </body>
 </html>
+{% else %}
+Acceso denegado
+{% endif%}

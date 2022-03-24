@@ -14,6 +14,20 @@ from .forms import *
 class ListRolView(ListView):
     model= Rol
     template_name= 'roles/list_rol.html'
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+       
+
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+       
+
+
+        return context
+
 
 @method_decorator(login_required, name='dispatch')
 class DetailRolView(LoginRequiredMixin, DetailView):
@@ -22,6 +36,19 @@ class DetailRolView(LoginRequiredMixin, DetailView):
     """
     model = Rol
     template_name = 'roles/detail_rol.html'
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+       
+
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+       
+
+
+        return context
 
 @method_decorator(login_required, name='dispatch')
 class RolListView2(LoginRequiredMixin, ListView):
@@ -30,6 +57,19 @@ class RolListView2(LoginRequiredMixin, ListView):
     """
     template_name = 'roles/list_rol.html'
     queryset = Rol.objects.all()
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+       
+
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+       
+
+
+        return context
 
 
 @method_decorator(login_required, name='dispatch')
@@ -42,6 +82,19 @@ class CreateRolView( LoginRequiredMixin, CreateView):
     success_url = '/security/roles/'
     form_class = RolForm
     success_message = 'Se ha creado el rol'
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+       
+
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+       
+
+
+        return context
 
 @method_decorator(login_required, name='dispatch')
 class UpdateRolView( LoginRequiredMixin, UpdateView):
@@ -53,9 +106,35 @@ class UpdateRolView( LoginRequiredMixin, UpdateView):
     success_url = '/security/roles/'
     form_class = RolForm
     success_message = 'Se ha modificado el Rol'
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+       
+
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+       
+
+
+        return context
 
 @method_decorator(login_required, name='dispatch')
 class DeleteRolView( LoginRequiredMixin, DeleteView):
     model= Rol
     success_url= '/security/roles/'
     template_name= 'roles/delete_rol.html'
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+       
+
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+       
+
+
+        return context

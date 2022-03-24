@@ -3,6 +3,7 @@
 {% block title %} Eliminar  {%endblock%}
 
 {% block content%}
+{% if 'Seguridad' in permisos%}
 <div class="main">
     <!-- Create a Form -->
     <form method="POST">
@@ -20,4 +21,7 @@
         
     </form>
 </div>
+{% else %}
+Acceso denegado
+{% endif %}
 {% endblock content%}

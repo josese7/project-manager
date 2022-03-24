@@ -6,6 +6,7 @@
         <h1 align="center"> {{ title }} </h1>
         <hr>
     </div>
+    {% if 'Seguridad' in permisos %}
     <div class="register">
         <div class="container detalle" style="font-size: 25px">
             <li>Nombre de usuario: {{ object.username }}</li>
@@ -29,6 +30,9 @@
             <i class="fas fa-arrow-left"></i> Atras</button></a>
         <hr>
     </div>
+    {% else %}
+    Acceso denegado
+    {% endif %}
 </div>
 </body>
 </html>
