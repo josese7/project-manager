@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, UsernameField
 from .models import Usuario
 
 class CreateUserForm(forms.ModelForm):
@@ -27,6 +28,21 @@ class CreateUserForm(forms.ModelForm):
             'password': forms.PasswordInput(),
             'roles': forms.CheckboxSelectMultiple(),
         }
+    def save(self, commit=True):
+        """
+        Metodo para guardar el formulario 
+
+        :user.set_password: encripta la contraseña como django lo necesita
+        :param commit: indicador de guardado en la base de datos, True: se debe guardar,
+                                                                  False: No guardar.
+        :return: El objeto creado por el formulario luego de ejecutar el metodo en el formulario
+        """
+        user = super(CreateUserForm, self).save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+            self.save_m2m()
+        return user
 
 class UpdateUserForm(forms.ModelForm):
     """
@@ -53,5 +69,6 @@ class UpdateUserForm(forms.ModelForm):
             'password': forms.PasswordInput(),
             'roles': forms.CheckboxSelectMultiple(),
         }
+    
 
     
