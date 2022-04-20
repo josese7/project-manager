@@ -13,6 +13,4 @@ class ProyectoForm(forms.ModelForm):
         model = Proyecto
         fields = ('nombre',
                   'descripcion',
-                  'fecha_inicio',
-                  'fecha_fin'
                   )

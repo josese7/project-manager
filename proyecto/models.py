@@ -10,11 +10,11 @@ tipos_permiso = [
     (terminado, 'Terminado')
 ]
 class Proyecto(models.Model):
-    nombre: models.CharField( max_length=50, null= False, blank=False)
-    descripcion: models.CharField( max_length=50)
-    fecha_inicio: models.DateField(blank=True, null=True)
-    fecha_fin: models.DateField(blank=True, null=True)
-    usuarios: models.ManyToManyField('usuario.Usuario', blank=False)
+    nombre= models.CharField( max_length=50, null= False, blank=False, default=' ')
+    descripcion = models.TextField(blank=True, null=True)
+    fecha_inicio= models.DateField(blank=True, null=True)
+    fecha_fin= models.DateField(blank=True, null=True)
+    usuarios= models.ManyToManyField('usuarios.Usuario', blank=False)
 
     def __str__(self):
         """
