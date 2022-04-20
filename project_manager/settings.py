@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'accounts',
     'rol',
     'usuarios',
-    'fontawesomefree'
+    'fontawesomefree',
+    'proyecto'
 ]
 
 AUTH_USER_MODEL = 'usuarios.Usuario'

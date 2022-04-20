@@ -11,6 +11,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         permisos=[]
         user = self.request.user
+        
         permisos = user.get_permisos()
         
         context = super().get_context_data(**kwargs)

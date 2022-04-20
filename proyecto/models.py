@@ -12,10 +12,9 @@ tipos_permiso = [
 class Proyecto(models.Model):
     nombre: models.CharField( max_length=50, null= False, blank=False)
     descripcion: models.CharField( max_length=50)
-    fecha_inicio: models.DateField(_(""), auto_now=False, auto_now_add=False)
-    fecha_fin: models.DateField(_(""), auto_now=False, auto_now_add=False)
-    usuarios: models.ManyToManyField("usuarios.Usuario", verbose_name=_(""))
-    
+    fecha_inicio: models.DateField(blank=True, null=True)
+    fecha_fin: models.DateField(blank=True, null=True)
+    usuarios: models.ManyToManyField('usuario.Usuario', blank=False)
 
     def __str__(self):
         """

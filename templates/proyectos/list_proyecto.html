@@ -1,0 +1,48 @@
+{% extends "base.html"%}
+
+{% block title %} Proyectos {%endblock%}
+
+{% block content%}
+{% if 'Proyecto' in permisos %}
+<table class="table table-sm scrolltable" width="100%">
+    <thead class="thead-dark thead">
+        <tr>
+            <th width="10%">ID</th>
+            <th width="25%">Nombre</th>
+            <th width="27%">Fecha inicio</th>
+            <th width="27%">Fecha fin</th>
+            <th width="8%">Acciones</th>
+            <th width="3%">
+          
+                    <a href="{% url 'create_proyecto'%}"><i class="fas fa-plus-square"></i></a>
+              
+            </th>
+        </tr>
+    </thead>
+    <tbody class="tbody">
+        {% for proyecto in object_list %}
+            <tr>
+                <td width="10%">{{ proyecto.pk }}</td>
+                <td width="25%">{{ proyecto.nombre }}</td>
+                <td width="27%">{{ proyecto.fecha_inicio}}</td>
+                <td width="27%">{{ proyecto.fecha_fin}}</td>
+                <td id="acciones" width="8%">
+                    <div class="action-container">
+                        <a href="{% url 'update_proyecto' proyecto.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{% url 'delete_proyecto' proyecto.pk %}"><i class="fa-regular fa-trash-can"></i></a>
+                        <a href="{% url 'detail_proyecto' proyecto.pk %}"><i class="fa-regular fa-eye"></i></a>
+                    </div>
+                    
+                </td>
+                <td width="3%"></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{%else%}
+Acceso denegado
+
+{% endif %}
+
+{%endblock%}
+
