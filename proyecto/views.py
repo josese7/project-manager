@@ -49,7 +49,7 @@ class CreateProyectoView( LoginRequiredMixin, CreateView):
     """
     template_name = 'proyectos/create_proyecto.html'
     model = Proyecto
-    success_url = '/proyectos/'
+    success_url = '/project/'
     form_class = ProyectoForm
     success_message = 'Se ha creado el proyecto'
 
@@ -71,7 +71,7 @@ class UpdateProyectoView( LoginRequiredMixin, UpdateView):
     """
     template_name = 'proyectos/update_proyecto.html'
     model = Proyecto
-    success_url = '/proyectos/'
+    success_url = '/project/'
     form_class = ProyectoForm
     success_message = 'Se ha modificado el proyecto'
 
@@ -88,7 +88,7 @@ class UpdateProyectoView( LoginRequiredMixin, UpdateView):
 @method_decorator(login_required, name='dispatch')
 class DeleteProyectoView( LoginRequiredMixin, DeleteView):
     model= Proyecto
-    success_url= '/proyectos/'
+    success_url= '/project'
     template_name= 'proyectos/delete_proyecto.html'
 
     def get_context_data(self, **kwargs):

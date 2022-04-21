@@ -1,0 +1,33 @@
+{%include 'base.html'%}
+<html>
+<body>
+<div class="container">
+    <div class="head">
+        <h1 align="center"> {{ title }} </h1>
+        <hr>
+    </div>
+    {% if 'Proyecto' in permisos %}
+    <div class="register">
+        <div class="container detalle" style="font-size: 25px">
+            <li>Nombre del proyecyo: {{ object.nombre }}</li>
+            <li>Descripcion: {% if object.descripcion %}{{ object.descripcion }}{% endif %}</li>
+            <li>Fecha de inicio: {{ object.fecha_inicio }}</li>
+            <li>Fecha de finalizacion: {{ object.fecha_inicio }}</li>
+            <li>Usuarios:</li>
+            {% comment %} <div class="container" style="margin-left: 50px">
+                {% for rol in object.roles.all %}
+                    <li>{{ rol }}</li>
+                {% endfor %}
+            </div> {% endcomment %}
+        </div>
+        <br>
+        <a href="{% url 'list_users'%}"><button type="button" class="btn submit-btn">
+            <i class="fas fa-arrow-left"></i> Atras</button></a>
+        <hr>
+    </div>
+    {% else %}
+    Acceso denegado
+    {% endif %}
+</div>
+</body>
+</html>
