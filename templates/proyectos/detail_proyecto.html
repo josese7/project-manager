@@ -4,7 +4,6 @@
 <div class="container">
     <div class="head">
         <h1 align="center"> {{ title }} </h1>
-        <hr>
     </div>
     {% if 'Proyecto' in permisos %}
     <div class="register">
@@ -14,14 +13,18 @@
             <li>Fecha de inicio: {{ object.fecha_inicio }}</li>
             <li>Fecha de finalizacion: {{ object.fecha_inicio }}</li>
             <li>Usuarios:</li>
-            {% comment %} <div class="container" style="margin-left: 50px">
-                {% for rol in object.roles.all %}
-                    <li>{{ rol }}</li>
+            <div class="container" style="margin-left: 50px">
+                {% for usuario in object.usuarios.all %}
+                    <li>{{ usuario }}</li>
                 {% endfor %}
-            </div> {% endcomment %}
+            </div>
+            
         </div>
         <br>
-        <a href="{% url 'list_users'%}"><button type="button" class="btn submit-btn">
+        <a href="{% url 'list_proy_usuario' proyecto.pk %}"><button type="button" class="btn submit-btn">
+            <i class="fa-solid fa-gear"></i> Gestionar miembros</button></a>
+        
+        <a href="{% url 'list_proyectos'%}"><button type="button" class="btn submit-btn">
             <i class="fas fa-arrow-left"></i> Atras</button></a>
         <hr>
     </div>

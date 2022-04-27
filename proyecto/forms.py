@@ -45,3 +45,18 @@ class ProyectoForm(forms.ModelForm):
         widgets = {
             
         }
+
+class ProyectoUserForm(forms.ModelForm):
+    class Meta:
+        """
+        Clase en la que se definen los datos necesarios y adicionales para inicializacion y
+        visualizacion del formulario
+        """
+        model = Proyecto
+        fields = (
+                    'usuarios',
+                  )
+        widgets = {
+            'usuarios': forms.CheckboxSelectMultiple(),
+        }
+    

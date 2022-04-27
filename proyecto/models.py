@@ -24,3 +24,5 @@ class Proyecto(models.Model):
         :return: retorna el valor del campo nombre del objeto actual
         """
         return self.nombre
+    def get_usuarios(self):
+        print(self.request)
