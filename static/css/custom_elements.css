@@ -17,3 +17,28 @@
     background: #6558db;
     text-decoration: none;
 }
+
+  /* CSS by GenerateCSS.com */ 
+  .register ul 
+  { 
+ list-style-type: circle;
+  list-style-image: url(' ');
+  list-style-position: outside;
+  } 
+ .register li 
+ { 
+ padding: 0px; 
+  margin: 0px; 
+  }  
+
+  .register label {
+    float: none!important;
+    clear: both;
+    color: #333;
+    margin-bottom: 4px;
+    justify-content: space-between!important;
+    width: 200px;
+}
+.register label input{
+    margin: 0 10px 10px;
+}

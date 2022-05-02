@@ -1,6 +1,6 @@
 from django.urls import path
 from django.views.generic import TemplateView
-from proyecto.views import ProyectoListView, CreateProyectoView, UpdateProyectoView, DeleteProyectoView, DetailProyectoView, ListProyectoUserView, AddProyectoUserView
+from proyecto.views import ProyectoListView, CreateProyectoView, UpdateProyectoView, DeleteProyectoView, DetailProyectoView, ListProyectoUserView, ManageProyectoUserView
 """ , AddUserProyectoView, , DeleteUserProyectoView  """
 
 
@@ -12,7 +12,8 @@ urlpatterns = [
     path('edit/<int:pk>/', UpdateProyectoView.as_view(), name='update_proyecto'),
     path('delete/<int:pk>/', DeleteProyectoView.as_view(), name='delete_proyecto'),
     path('detail/<int:pk>/list', ListProyectoUserView.as_view(), name='list_proy_usuario'),
-    path('detail/<int:pk>/add', AddProyectoUserView.as_view(), name='add_proy_usuario'),
+    path('detail/<int:pk>/manage', ManageProyectoUserView.as_view(), name='manage_proy_usuario'),
+    
 ]
 
 """ 

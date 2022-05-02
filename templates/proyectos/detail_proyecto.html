@@ -12,7 +12,7 @@
             <li>Descripcion: {% if object.descripcion %}{{ object.descripcion }}{% endif %}</li>
             <li>Fecha de inicio: {{ object.fecha_inicio }}</li>
             <li>Fecha de finalizacion: {{ object.fecha_inicio }}</li>
-            <li>Usuarios:</li>
+            <li>Miembros del proyecto:</li>
             <div class="container" style="margin-left: 50px">
                 {% for usuario in object.usuarios.all %}
                     <li>{{ usuario }}</li>
@@ -21,7 +21,7 @@
             
         </div>
         <br>
-        <a href="{% url 'list_proy_usuario' proyecto.pk %}"><button type="button" class="btn submit-btn">
+        <a href="{% url 'manage_proy_usuario' proyecto.pk %}"><button type="button" class="btn submit-btn">
             <i class="fa-solid fa-gear"></i> Gestionar miembros</button></a>
         
         <a href="{% url 'list_proyectos'%}"><button type="button" class="btn submit-btn">

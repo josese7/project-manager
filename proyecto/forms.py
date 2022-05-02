@@ -56,6 +56,9 @@ class ProyectoUserForm(forms.ModelForm):
         fields = (
                     'usuarios',
                   )
+        labels= {
+            'usuarios': 'Gestion de miembros',
+        }
         widgets = {
             'usuarios': forms.CheckboxSelectMultiple(),
         }

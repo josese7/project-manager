@@ -107,7 +107,7 @@ class DeleteProyectoView( LoginRequiredMixin, DeleteView):
 @method_decorator(login_required, name='dispatch')
 class ListProyectoUserView( LoginRequiredMixin, TemplateView):
 
-    template_name = 'usuarios/list_user.html'
+    template_name = 'proyectos/list_proyecto_users.html'
 
     def get_context_data(self, **kwargs):
         permisos=[]
@@ -120,11 +120,13 @@ class ListProyectoUserView( LoginRequiredMixin, TemplateView):
         context["permisos"] = permisos
         context["object_list"] = usuarios
         context["view"] = 'Proyecto'
+        context["proyecto"] = proyecto
+        print(proyecto.pk)
  
         return context
         
 @method_decorator(login_required, name='dispatch')
-class AddProyectoUserView( LoginRequiredMixin, UpdateView):
+class ManageProyectoUserView( LoginRequiredMixin, UpdateView):
     """
     Clase de la vista para la creacion de un Usuario
     """
