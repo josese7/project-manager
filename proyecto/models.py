@@ -1,5 +1,6 @@
 from django.db import models
 from usuarios.models import *
+
 from datetime import datetime, timedelta
 import calendar
 pendiente = '1'
@@ -17,6 +18,7 @@ class Proyecto(models.Model):
     fecha_inicio= models.DateField(blank=False, null=False, default=datetime.now())
     fecha_fin= models.DateField(blank=False, null=False, default=datetime.now() + timedelta(days=60))
     usuarios= models.ManyToManyField('usuarios.Usuario', blank=False)
+    
 
     def __str__(self):
         """

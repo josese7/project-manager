@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rol',
     'usuarios',
     'fontawesomefree',
-    'proyecto'
+    'proyecto',
+    'backlog'
 ]
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
@@ -79,14 +80,14 @@ WSGI_APPLICATION = 'project_manager.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-""" DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db2.sqlite3',
     }
-} """
+}
 
-DATABASES = {
+""" DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'db_project_is2',
@@ -95,7 +96,7 @@ DATABASES = {
         'HOST':'127.0.0.1',
         'PORT':'5432'
     }
-}
+} """
 
 
 # Password validation

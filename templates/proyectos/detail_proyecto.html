@@ -13,9 +13,11 @@
             <li>Fecha de inicio: {{ object.fecha_inicio }}</li>
             <li>Fecha de finalizacion: {{ object.fecha_inicio }}</li>
             <li>Miembros del proyecto:</li>
+            <li>{{ object.backlog.pk}}</li> 
             <div class="container" style="margin-left: 50px">
                 {% for usuario in object.usuarios.all %}
                     <li>{{ usuario }}</li>
+                    
                 {% endfor %}
             </div>
             
