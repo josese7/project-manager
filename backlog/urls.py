@@ -1,19 +1,18 @@
 from django.urls import path
 from django.views.generic import TemplateView
-from proyecto.views import ProyectoListView, CreateProyectoView, UpdateProyectoView, DeleteProyectoView, DetailProyectoView, ListProyectoUserView, ManageProyectoUserView
-""" , AddUserProyectoView, , DeleteUserProyectoView  """
+from backlog.views import ListBacklogView, UpdateBacklogView, DetailBacklogView, CreateUserStoryView, UpdateUserStoryView, DeleteUserStoryView, UpdateUserStoryView, DetailUserStoryView
 
 
 urlpatterns = [
     
-    path('', ProyectoListView.as_view(), name="list_proyectos"),
-    path('add/', CreateProyectoView.as_view(), name='create_proyecto'),
-    path('detail/<int:pk>/', DetailProyectoView.as_view(), name='detail_proyecto'),
-    path('edit/<int:pk>/', UpdateProyectoView.as_view(), name='update_proyecto'),
-    path('delete/<int:pk>/', DeleteProyectoView.as_view(), name='delete_proyecto'),
-    path('detail/<int:pk>/list', ListProyectoUserView.as_view(), name='list_proy_usuario'),
-    path('detail/<int:pk>/manage', ManageProyectoUserView.as_view(), name='manage_proy_usuario'),
-    
+    path('', ListBacklogView.as_view(), name="list_backlogs"),
+    path('edit/<int:pk>/', UpdateBacklogView.as_view(), name='update_backlog'),
+    path('detail/<int:pk>/', DetailBacklogView.as_view(), name='detail_backlog'),
+    path('addus/', CreateUserStoryView.as_view(), name='create_us'),
+    path('editus/<int:pk>/', UpdateUserStoryView.as_view(), name='update_userstory'),
+    path('deleteus/<int:pk>/', DeleteUserStoryView.as_view(), name='delete_userstory'),
+    path('detailus/<int:pk>/', DetailUserStoryView.as_view(), name='detail_userstory'),
+
 ]
 
 """ 

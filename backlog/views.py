@@ -11,46 +11,36 @@ from django.urls import reverse_lazy
 
 from usuarios.models import Usuario
 from proyecto.models import Proyecto
-from backlog.models import Backlog
+from backlog.models import Backlog, UserStory
 # Create your views here.
 @method_decorator(login_required, name='dispatch')
 
 
 
+class ListBacklogView(ListView):
+    model= Backlog
+    template_name= 'backlogs/list_backlogs.html'
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+
+        return context
     
+
+
 @method_decorator(login_required, name='dispatch')
-class CreateBacklogView( LoginRequiredMixin, CreateView):
+class UpdateBacklogView( LoginRequiredMixin, UpdateView):
     """
     Clase de la vista para la creacion de un Usuario
     """
-    template_name = 'backlog/create_backlog.html'
+    template_name = 'proyectos/update_proyecto.html'
     model = Backlog
     success_url = '/project/'
     form_class = BacklogForm
-    success_message = 'Se ha creado el backlog'
-
-    def get_context_data(self, **kwargs):
-        permisos=[]
-        user = self.request.user
-        permisos = user.get_permisos()
-        
-        context = super().get_context_data(**kwargs)
-        context["permisos"] = permisos
-
-        return context
-    
-    
-
-
-@method_decorator(login_required, name='dispatch')
-class UpdateProyectoView( LoginRequiredMixin, UpdateView):
-    """
-    Clase de la vista para la creacion de un Usuario
-    """
-    template_name = 'proyectos/update_proyecto.html'
-    model = Proyecto
-    success_url = '/project/'
-    form_class = ProyectoForm
     success_message = 'Se ha modificado el proyecto'
 
     def get_context_data(self, **kwargs):
@@ -64,60 +54,115 @@ class UpdateProyectoView( LoginRequiredMixin, UpdateView):
         return context
 
 @method_decorator(login_required, name='dispatch')
-class DeleteProyectoView( LoginRequiredMixin, DeleteView):
-    model= Proyecto
-    success_url= '/project'
-    template_name= 'proyectos/delete_proyecto.html'
-
+class DetailBacklogView(LoginRequiredMixin, DetailView):
+    """
+    Clase de la vista de los detalles de un Usuario
+    """
+    model = Backlog
+    template_name = 'backlogs/detail_backlog2.html'
     def get_context_data(self, **kwargs):
         permisos=[]
         user = self.request.user
         permisos = user.get_permisos()
+       
+
         
         context = super().get_context_data(**kwargs)
         context["permisos"] = permisos
+        backlog= Backlog.objects.get(pk=self.kwargs['pk'])
+        context["us"] = backlog.userstory_set.all()
+
 
         return context
-    
 
+
+""" USER STORIES"""
 @method_decorator(login_required, name='dispatch')
-class ListProyectoUserView( LoginRequiredMixin, TemplateView):
-
-    template_name = 'proyectos/list_proyecto_users.html'
-
-    def get_context_data(self, **kwargs):
-        permisos=[]
-        user = self.request.user
-        permisos = user.get_permisos()
-
-        proyecto= Proyecto.objects.get(pk=self.kwargs['pk'])
-        usuarios = proyecto.usuarios.all()
-        context = super().get_context_data(**kwargs)
-        context["permisos"] = permisos
-        context["object_list"] = usuarios
-        context["view"] = 'Proyecto'
-        context["proyecto"] = proyecto
-        print(proyecto.pk)
- 
-        return context
-        
-@method_decorator(login_required, name='dispatch')
-class ManageProyectoUserView( LoginRequiredMixin, UpdateView):
+class CreateUserStoryView( LoginRequiredMixin, CreateView):
     """
     Clase de la vista para la creacion de un Usuario
     """
-    template_name = 'proyectos/update_proyecto.html'
-    model = Proyecto
-    success_url = '/project/'
-    form_class = ProyectoUserForm
-    success_message = 'Se ha modificado el proyecto'
+    template_name = 'userstories/create_userstory.html'
+    model = UserStory
+    success_url = '/desarrollo'
+    form_class = UserStoryForm
+    success_message = 'Se ha creado el User Story'
 
     def get_context_data(self, **kwargs):
         permisos=[]
         user = self.request.user
         permisos = user.get_permisos()
         
+       
+
+        
         context = super().get_context_data(**kwargs)
         context["permisos"] = permisos
+       
+
+
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class DetailUserStoryView(LoginRequiredMixin, DetailView):
+    """
+    Clase de la vista de los detalles de un Usuario
+    """
+    model = UserStory
+    template_name = 'userstories/detail_userstory.html'
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+       
+
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+       
+
+
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class UpdateUserStoryView( LoginRequiredMixin, UpdateView):
+    """
+    Clase de la vista para la creacion de un Usuario
+    """
+    template_name = 'userstories/update_userstory.html'
+    model = UserStory
+    success_url = '/desarrollo/'
+    form_class = UserStoryForm
+    success_message = 'Se ha modificado el UserStory'
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+       
+
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+       
+
+
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class DeleteUserStoryView( LoginRequiredMixin, DeleteView):
+    model= UserStory
+    success_url= '/desarrollo/'
+    template_name= 'userstories/delete_userstory.html'
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+       
+
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+       
+
 
         return context

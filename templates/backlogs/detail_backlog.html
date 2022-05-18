@@ -1,4 +1,4 @@
-{%include 'base.html'%}
+s{%include 'base.html'%}
 <html>
 <body>
 <div class="container">
@@ -9,22 +9,17 @@
     <div class="register">
         <div class="container detalle" style="font-size: 25px">
             <li>Nombre del proyecyo: {{ object.nombre }}</li>
-            <li>Descripcion: {% if object.descripcion %}{{ object.descripcion }}{% endif %}</li>
-            <li>Fecha de inicio: {{ object.fecha_inicio }}</li>
-            <li>Fecha de finalizacion: {{ object.fecha_inicio }}</li>
-            <li>Miembros del proyecto:</li>
+            <li>User Stories:</li>
             
             <div class="container" style="margin-left: 50px">
-                {% for usuario in object.usuarios.all %}
-                    <li>{{ usuario }}</li>
+                {% for us in object.userstory.all %}
+                    <li>{{ us }}</li>
                     
                 {% endfor %}
             </div>
             
         </div>
         <br>
-        <a href="{% url 'manage_proy_usuario' proyecto.pk %}"><button type="button" class="btn submit-btn">
-            <i class="fa-solid fa-gear"></i> Gestionar miembros</button></a>
         
         <a href="{% url 'list_proyectos'%}"><button type="button" class="btn submit-btn">
             <i class="fas fa-arrow-left"></i> Atras</button></a>

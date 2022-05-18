@@ -12,16 +12,17 @@
           Modulo de Seguridad  
         </a>
         {% endif %}
-        {% if 'Desarrollo' in permisos %}
-        <a href="{% url 'security'%}">
-            Modulo de Desarrollo  
-          </a>
-        {% endif %}
         {% if 'Proyecto' in permisos %}
         <a href="{% url 'list_proyectos'%}">
             Modulo de Proyecto  
           </a>
         {% endif %}
+        {% if 'Desarrollo' in permisos %}
+        <a href="{% url 'list_backlogs'%}">
+            Modulo de Desarrollo  
+          </a>
+        {% endif %}
+        
 
     </div>
 

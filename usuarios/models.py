@@ -91,5 +91,5 @@ class Usuario(AbstractBaseUser):
             
             permisos_list= list(set(permisos))
         
-        print(permisos_list)
+        
         return permisos_list

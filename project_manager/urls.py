@@ -23,6 +23,7 @@ urlpatterns = [
     #path('roles/', include('rol.urls')),
     #path('usuarios/', include('usuarios.urls')),
     path('security/', include('securitytest.urls')),
-    path('project/', include('proyecto.urls'))
+    path('project/', include('proyecto.urls')),
+    path('desarrollo/', include('backlog.urls')),
 
 ]

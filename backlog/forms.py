@@ -11,5 +11,19 @@ class BacklogForm(forms.ModelForm):
         visualizacion del formulario
         """
         model = Backlog
-        fields = ('nombre')
-        
+        fields = ('nombre',)
+
+class UserStoryForm(forms.ModelForm):
+    """
+    Formulario para la creacion de un  Usuario
+    """
+    class Meta:
+        """
+        Clase en la que se definen los datos necesarios y adicionales para inicializacion y
+        visualizacion del formulario
+        """
+        model = UserStory
+        fields = ('nombre', 'descripcion', 'backlog')
+
+        widgets = {} 
+    

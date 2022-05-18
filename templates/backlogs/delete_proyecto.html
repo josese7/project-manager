@@ -1,0 +1,27 @@
+{%extends "base.html"%}
+
+{% block title %} Eliminar  {%endblock%}
+
+{% block content%}
+{% if 'Proyecto' in permisos%}
+<div class="main">
+    <!-- Create a Form -->
+    <form method="POST">
+        <!-- Security token by Django -->
+        {% csrf_token %}
+        
+        <h3>
+            ¿ Quieres eliminar este proyecto? ?
+        </h3>
+        <div class="buttons-container">
+            <input type="submit" value="Eliminar" />
+
+            <a href="{% url "list_proyectos"%}"> Cancelar</a>
+        </div>
+        
+    </form>
+</div>
+{% else %}
+Acceso denegado
+{% endif %}
+{% endblock content%}

@@ -1,0 +1,25 @@
+{%include 'base.html'%}
+<html>
+<body>
+<div class="container">
+    <div class="head">
+        <h1 align="center"> {{ title }} </h1>
+        <hr>
+    </div>
+    {% if 'Seguridad' in permisos %}
+    <div class="register">
+        <div class="container detalle" style="font-size: 25px">
+            <li>Nombre: {{ object.nombre }}</li>
+            <li>Descripcion: {{ object.descripcion }}</li>
+        </div>
+        <br>
+        <a href="{% url 'detail_backlog' object.backlog.pk %}"><button type="button" class="btn submit-btn">
+            <i class="fas fa-arrow-left"></i> Atras</button></a>
+        <hr>
+    </div>
+    {% else %}
+    Acceso denegado.
+    {% endif%}
+</div>
+</body>
+</html>
