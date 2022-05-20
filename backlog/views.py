@@ -88,6 +88,14 @@ class CreateUserStoryView( LoginRequiredMixin, CreateView):
     form_class = UserStoryForm
     success_message = 'Se ha creado el User Story'
 
+    def get_form_kwargs(self):
+        kwargs = super(CreateUserStoryView, self).get_form_kwargs()
+        
+        backlog = Backlog.objects.get(pk=self.kwargs['pk'])
+
+        kwargs['backlog'] =backlog # pasamos el backlog a los kwargs del formulario
+        return kwargs
+
     def get_success_url(self):
         
         return reverse('detail_backlog', kwargs={'pk': self.object.backlog.pk})
@@ -97,16 +105,22 @@ class CreateUserStoryView( LoginRequiredMixin, CreateView):
         user = self.request.user
         permisos = user.get_permisos()
         
-              
+        print(self.kwargs) 
+        backlog= Backlog.objects.get(pk=self.kwargs['pk']) 
      
 
         
         context = super().get_context_data(**kwargs)
         context["permisos"] = permisos
+        context["backlog"] = backlog
        
 
 
         return context
+    def form_valid(self, form):
+        
+        self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 @method_decorator(login_required, name='dispatch')
 class DetailUserStoryView(LoginRequiredMixin, DetailView):
