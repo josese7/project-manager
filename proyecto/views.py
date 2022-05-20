@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 from backlog.models import Backlog
 from usuarios.models import Usuario
@@ -84,6 +84,8 @@ class CreateProyectoView( LoginRequiredMixin, CreateView):
         permisos=[]
         user = self.request.user
         permisos = user.get_permisos()
+
+        print(self.kwargs)
         
         context = super().get_context_data(**kwargs)
         context["permisos"] = permisos
@@ -148,6 +150,7 @@ class ListProyectoUserView( LoginRequiredMixin, TemplateView):
         context["object_list"] = usuarios
         context["view"] = 'Proyecto'
         context["proyecto"] = proyecto
+        print(self.kwargs)
         print(proyecto.pk)
  
         return context
@@ -162,6 +165,9 @@ class ManageProyectoUserView( LoginRequiredMixin, UpdateView):
     success_url = '/project/'
     form_class = ProyectoUserForm
     success_message = 'Se ha modificado el proyecto'
+
+    def get_success_url(self):
+         return reverse('detail_proyecto', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         permisos=[]

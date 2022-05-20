@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
 
 from usuarios.models import Usuario
@@ -88,12 +88,17 @@ class CreateUserStoryView( LoginRequiredMixin, CreateView):
     form_class = UserStoryForm
     success_message = 'Se ha creado el User Story'
 
+    def get_success_url(self):
+        
+        return reverse('detail_backlog', kwargs={'pk': self.object.backlog.pk})
+    
     def get_context_data(self, **kwargs):
         permisos=[]
         user = self.request.user
         permisos = user.get_permisos()
         
-       
+              
+     
 
         
         context = super().get_context_data(**kwargs)
@@ -114,11 +119,10 @@ class DetailUserStoryView(LoginRequiredMixin, DetailView):
         permisos=[]
         user = self.request.user
         permisos = user.get_permisos()
-       
 
-        
         context = super().get_context_data(**kwargs)
         context["permisos"] = permisos
+        context["backlog"] = backlog
        
 
 

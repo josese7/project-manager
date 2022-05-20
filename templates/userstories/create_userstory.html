@@ -8,7 +8,7 @@
     </div>
     <div class="register">
         <div class="container form-container">
-            {% if 'Seguridad' in permisos %}
+            {% if 'Desarrollo' in permisos %}
             <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p}}

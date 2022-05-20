@@ -5,10 +5,10 @@ s{%include 'base.html'%}
     <div class="head">
         <h1 align="center"> {{ title }} </h1>
     </div>
-    {% if 'Proyecto' in permisos %}
+    {% if 'Desarrollo' in permisos %}
     <div class="register">
         <div class="container detalle" style="font-size: 25px">
-            <li>Nombre del proyecyo: {{ object.nombre }}</li>
+            <li>Nombre del backlog: {{ object.nombre }}</li>
             <li>User Stories:</li>
             
             <div class="container" style="margin-left: 50px">
