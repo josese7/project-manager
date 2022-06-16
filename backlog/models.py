@@ -1,6 +1,16 @@
 from django.db import models
 from proyecto.models import *
-
+"""
+Definicion de los estados de User Story
+"""
+PENDIENTE = 2
+ASIGNADO = 1
+FINALIZADO = 0
+ESTADOS_US = (
+    (PENDIENTE, 'Pendiente'),
+    (ASIGNADO, 'Asignado'),
+    (FINALIZADO,'Finalizado')
+)
 class UserStory(models.Model):
     nombre= models.CharField( max_length=50, null= False, blank=False, default=' ')
     descripcion = models.TextField(blank=True, null=True)
@@ -8,6 +18,12 @@ class UserStory(models.Model):
         'Backlog',
         on_delete=models.CASCADE,
     )
+    usuarios =  models.ForeignKey(
+        'usuarios.Usuario',
+        on_delete=models.SET_NULL, null = True, default=None
+    )
+    comentario= models.TextField(blank=True, null=True, default=' ')
+    estado = models.PositiveIntegerField(default=PENDIENTE, choices=ESTADOS_US) 
 
     def __str__(self):
         """

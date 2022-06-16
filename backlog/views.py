@@ -91,7 +91,9 @@ class CreateUserStoryView( LoginRequiredMixin, CreateView):
     def get_form_kwargs(self):
         kwargs = super(CreateUserStoryView, self).get_form_kwargs()
         
-        backlog = Backlog.objects.get(pk=self.kwargs['pk'])
+        backlog = Backlog.objects.filter(pk=self.kwargs['pk']).first()
+       
+        print(self.kwargs['pk'])
 
         kwargs['backlog'] =backlog # pasamos el backlog a los kwargs del formulario
         return kwargs
@@ -136,10 +138,7 @@ class DetailUserStoryView(LoginRequiredMixin, DetailView):
 
         context = super().get_context_data(**kwargs)
         context["permisos"] = permisos
-        context["backlog"] = backlog
-       
-
-
+    
         return context
 
 @method_decorator(login_required, name='dispatch')
@@ -150,19 +149,53 @@ class UpdateUserStoryView( LoginRequiredMixin, UpdateView):
     template_name = 'userstories/update_userstory.html'
     model = UserStory
     success_url = '/desarrollo/'
-    form_class = UserStoryForm
+    form_class = UserStoryUpdateForm
     success_message = 'Se ha modificado el UserStory'
+
+    def get_form_kwargs(self):
+        kwargs = super(UpdateUserStoryView, self).get_form_kwargs()
+        
+        us = UserStory.objects.filter(pk=self.kwargs['pk']).first()
+       
+        print(self.kwargs['pk'])
+
+        kwargs['backlog'] =us.backlog # pasamos el backlog a los kwargs del formulario
+        return kwargs
+
     def get_context_data(self, **kwargs):
         permisos=[]
         user = self.request.user
         permisos = user.get_permisos()
-       
+        
 
         
         context = super().get_context_data(**kwargs)
         context["permisos"] = permisos
        
+       
 
+
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class CambiarEstadoUsView( LoginRequiredMixin, UpdateView):
+    """
+    Clase de la vista para la creacion de un Usuario
+    """
+    template_name = 'userstories/update_userstory.html'
+    model = UserStory
+    success_url = '/desarrollo/'
+    form_class = ComentarUSForm
+    success_message = 'Se ha modificado el UserStory'
+
+
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
 
         return context
 
