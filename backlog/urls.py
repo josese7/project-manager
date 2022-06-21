@@ -1,6 +1,6 @@
 from django.urls import path
 from django.views.generic import TemplateView
-from backlog.views import ListBacklogView, UpdateBacklogView, DetailBacklogView, CreateUserStoryView, UpdateUserStoryView, DeleteUserStoryView, UpdateUserStoryView, DetailUserStoryView
+from backlog.views import ListBacklogView, UpdateBacklogView, DetailBacklogView, CreateUserStoryView, UpdateUserStoryView, DeleteUserStoryView, UpdateUserStoryView, DetailUserStoryView, CreateComentarioUs
 
 
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     path('editus/<int:pk>/', UpdateUserStoryView.as_view(), name='update_userstory'),
     path('deleteus/<int:pk>/', DeleteUserStoryView.as_view(), name='delete_userstory'),
     path('detailus/<int:pk>/', DetailUserStoryView.as_view(), name='detail_userstory'),
+     path('detailus/<int:pk>/addcomentarus/', CreateComentarioUs.as_view(), name='comentar_userstory'),
 
 ]
 

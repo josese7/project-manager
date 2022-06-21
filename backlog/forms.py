@@ -73,17 +73,17 @@ class UserStoryUpdateForm(forms.ModelForm):
         visualizacion del formulario
         """
         model = UserStory
-        fields = ('nombre', 'descripcion', 'usuarios')
+        fields = ('nombre', 'descripcion','usuarios')
 
 
-class ComentarUSForm(forms.ModelForm):
+class ComentarioUSForm(forms.ModelForm):
     """
     Formulario para la creacion de un  Usuario
     """ 
-    def __init__(self, backlog, *args, **kwargs):
-        super(ComentarUSForm, self).__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super(ComentarioUSForm, self).__init__(*args, **kwargs)
         #Change date field's widget hereWS
-        c = self.fields['comentario'].widget
+        
 
     class Meta:
         """
@@ -91,8 +91,7 @@ class ComentarUSForm(forms.ModelForm):
         visualizacion del formulario
         """
         model = UserStory
-        fields = ('comentario',)
-        widget = forms.TextInput(attrs={'placeholder': 'Type name here...'})
+        fields = ('descripcion',)
 
        
 

@@ -11,12 +11,9 @@ from django.urls import reverse_lazy, reverse
 
 from usuarios.models import Usuario
 from proyecto.models import Proyecto
-from backlog.models import Backlog, UserStory
+from backlog.models import Backlog, UserStory, Comentario
 # Create your views here.
 @method_decorator(login_required, name='dispatch')
-
-
-
 class ListBacklogView(ListView):
     model= Backlog
     template_name= 'backlogs/list_backlogs.html'
@@ -177,27 +174,7 @@ class UpdateUserStoryView( LoginRequiredMixin, UpdateView):
 
         return context
 
-@method_decorator(login_required, name='dispatch')
-class CambiarEstadoUsView( LoginRequiredMixin, UpdateView):
-    """
-    Clase de la vista para la creacion de un Usuario
-    """
-    template_name = 'userstories/update_userstory.html'
-    model = UserStory
-    success_url = '/desarrollo/'
-    form_class = ComentarUSForm
-    success_message = 'Se ha modificado el UserStory'
 
-
-    def get_context_data(self, **kwargs):
-        permisos=[]
-        user = self.request.user
-        permisos = user.get_permisos()
-
-        context = super().get_context_data(**kwargs)
-        context["permisos"] = permisos
-
-        return context
 
 @method_decorator(login_required, name='dispatch')
 class DeleteUserStoryView( LoginRequiredMixin, DeleteView):
@@ -217,3 +194,58 @@ class DeleteUserStoryView( LoginRequiredMixin, DeleteView):
 
 
         return context
+
+
+""" Comentario """
+@method_decorator(login_required, name='dispatch')
+class ListComentarioView(ListView):
+    model= Comentario
+    template_name= 'backlogs/list_comentario_us.html'
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+        
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+
+        return context
+@method_decorator(login_required, name='dispatch')
+class CreateComentarioUs( LoginRequiredMixin, CreateView):
+    """
+    Clase de la vista para la creacion de un Usuario
+    """
+    template_name = 'userstories/create_comentario_us.html'
+    model = Comentario
+    form_class = ComentarioUSForm
+    success_message = 'Se ha creado el Comentario'
+    
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+    
+        return context
+    def post(self, request, *args, **kwargs):
+        """
+        Metodo que es ejecutado al darse una consulta POST
+        :param request: consulta recibida
+        :param args: argumentos adicionales
+        :param kwargs: diccionario de datos adicionales
+        :return: la respuesta a la consulta POST
+        """
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+    def form_valid(self, form):
+        self.object 
+        self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
