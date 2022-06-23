@@ -53,7 +53,7 @@ class Backlog(models.Model):
 class Comentario(models.Model):
     usuario = models.CharField( max_length=50, null= False, blank=False, default=' ')
     descripcion = models.TextField(blank=False, null=False)
-    estado = models.PositiveIntegerField( choices=ESTADOS_US) 
+    estado = models.CharField( max_length=50, null= False, blank=False, default=' ') 
     fecha = models.DateField(blank=False, null=False, default=datetime.now())
     userstory = models.ForeignKey(
         'UserStory',

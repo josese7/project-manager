@@ -228,6 +228,11 @@ class CreateComentarioUs( LoginRequiredMixin, CreateView):
         context["permisos"] = permisos
     
         return context
+    def get_form_kwargs(self):
+        kwargs = super(CreateComentarioUs, self).get_form_kwargs()
+        us = UserStory.objects.get(pk=self.kwargs['pk'])
+        kwargs['us'] =us # pasamos el backlog a los kwargs del formulario
+        return kwargs
     def post(self, request, *args, **kwargs):
         """
         Metodo que es ejecutado al darse una consulta POST
@@ -239,6 +244,7 @@ class CreateComentarioUs( LoginRequiredMixin, CreateView):
         self.object = None
         form_class = self.get_form_class()
         form = self.get_form(form_class)
+        print(form)
 
 
         if form.is_valid():
