@@ -1,0 +1,16 @@
+
+
+{% if obj %}
+
+
+<form role="form" action="{% url 'catalogos:subcategoria_edit' obj.pk %}" method="post"  class="form-inline">
+
+
+{% else %}
+
+
+<form role="form" action="{% url 'catalogos:subcategoria_new' %}" method="post"  class="form-inline">
+
+
+{% endif %}
+

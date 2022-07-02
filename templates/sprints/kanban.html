@@ -30,13 +30,13 @@
                               <h6 class="card-subtitle mb-2 text-muted">{{ us.usuarios }}</h6>
                               <p class="card-text">{{ us.descripcion }}</p>
                               <div class="col d-flex justify-content-center">
-                                <a href="{% url 'comentar_userstory_next' us.pk %}" class="card-link"><i class="fa-solid fa-arrow-right-arrow-left"></i></a>
+                                <a href="{% url 'comentar_userstory_next' us.pk %}" class="card-link"><i class="fa-solid fa-forward"></i></a>
                                 <a href="#" class="card-link"><i class="fa-solid fa-info"></i></a>
                               </div>
                               
                             </div>
                           </div>
-                        </tr>
+                        
                     {%endif%}
 
 
@@ -46,14 +46,16 @@
             <td>
                 {% for us in object_list%}
 
-                {%if us.estado == 0%}    
+                {%if us.estado == 1%}    
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
                           <h5 class="card-title">{{ us.nombre}}</h5>
                           <h6 class="card-subtitle mb-2 text-muted">{{ us.usuarios }}</h6>
                           <p class="card-text">{{ us.descripcion }}</p>
                           <div class="col d-flex justify-content-center">
-                            <a href="{% url 'comentar_userstory_next' us.pk %}" class="card-link"><i class="fa-solid fa-arrow-right-arrow-left"></i></a>
+                            <a href="{% url 'comentar_userstory_back' us.pk %}" class="card-link"><i class="fa-solid fa-backward-fast"></i></a>
+                            <a href="{% url 'comentar_userstory_next' us.pk %}" class="card-link"><i class="fa-solid fa-forward"></i></a>
+                           
                             <a href="#" class="card-link"><i class="fa-solid fa-info"></i></a>
                           </div>
                           
@@ -69,14 +71,14 @@
             <td>
               {% for us in object_list%}
 
-              {%if us.estado == 1%}    
+              {%if us.estado == 0%}    
                   <div class="card" style="width: 18rem;">
                       <div class="card-body">
                         <h5 class="card-title">{{ us.nombre}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{ us.usuarios }}</h6>
                         <p class="card-text">{{ us.descripcion }}</p>
                         <div class="col d-flex justify-content-center">
-                          <a href="{% url 'comentar_userstory_next' us.pk %}" class="card-link"><i class="fa-solid fa-arrow-right-arrow-left"></i></a>
+                          <a href="{% url 'comentar_userstory_back' us.pk %}" class="card-link"><i class="fa-solid fa-backward-fast"></i></a>
                           <a href="#" class="card-link"><i class="fa-solid fa-info"></i></a>
                         </div>
                         
