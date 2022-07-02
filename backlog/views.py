@@ -68,6 +68,7 @@ class DetailBacklogView(LoginRequiredMixin, DetailView):
         context["permisos"] = permisos
         backlog= Backlog.objects.get(pk=self.kwargs['pk'])
         context["us"] = backlog.userstory_set.all()
+        context["pk"] = self.kwargs['pk']
 
 
         return context
@@ -117,6 +118,9 @@ class CreateUserStoryView( LoginRequiredMixin, CreateView):
 
         return context
     def form_valid(self, form):
+        backlog = Backlog.objects.filter(pk=self.kwargs['pk']).first()
+        print('form_valid')
+        print(backlog)
         
         self.object = form.save()
         return HttpResponseRedirect(self.get_success_url())
@@ -158,6 +162,9 @@ class UpdateUserStoryView( LoginRequiredMixin, UpdateView):
 
         kwargs['backlog'] =us.backlog # pasamos el backlog a los kwargs del formulario
         return kwargs
+    def get_success_url(self):
+        
+        return reverse('detail_backlog', kwargs={'pk': self.object.backlog.pk})
 
     def get_context_data(self, **kwargs):
         permisos=[]
@@ -173,6 +180,10 @@ class UpdateUserStoryView( LoginRequiredMixin, UpdateView):
 
 
         return context
+    def form_valid(self, form):
+        
+        self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 
 
@@ -211,7 +222,7 @@ class ListComentarioView(ListView):
 
         return context
 @method_decorator(login_required, name='dispatch')
-class CreateComentarioUs( LoginRequiredMixin, CreateView):
+class CreateComentarioUsNext( LoginRequiredMixin, CreateView):
     """
     Clase de la vista para la creacion de un Usuario
     """
@@ -226,32 +237,66 @@ class CreateComentarioUs( LoginRequiredMixin, CreateView):
         permisos = user.get_permisos()
         context = super().get_context_data(**kwargs)
         context["permisos"] = permisos
+        us = UserStory.objects.get(pk=self.kwargs['pk'])
+        context["us_actual"] = us
+
     
         return context
+    def get_success_url(self):
+        
+        us= UserStory.objects.filter(pk=self.kwargs['pk']).first()
+        us.estado = us.estado - 1
+        us.save()
+        print(us)
+        
+        return reverse('kanban_sprint', kwargs={'pk': self.object.userstory.sprint_id})
     def get_form_kwargs(self):
-        kwargs = super(CreateComentarioUs, self).get_form_kwargs()
+        kwargs = super(CreateComentarioUsNext, self).get_form_kwargs()
         us = UserStory.objects.get(pk=self.kwargs['pk'])
         kwargs['us'] =us # pasamos el backlog a los kwargs del formulario
         return kwargs
-    def post(self, request, *args, **kwargs):
-        """
-        Metodo que es ejecutado al darse una consulta POST
-        :param request: consulta recibida
-        :param args: argumentos adicionales
-        :param kwargs: diccionario de datos adicionales
-        :return: la respuesta a la consulta POST
-        """
-        self.object = None
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        print(form)
-
-
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
     def form_valid(self, form):
         self.object 
         self.object = form.save()
+        
+        return HttpResponseRedirect(self.get_success_url())
+
+@method_decorator(login_required, name='dispatch')
+class CreateComentarioUsBack( LoginRequiredMixin, CreateView):
+    """
+    Clase de la vista para la creacion de un Usuario
+    """
+    template_name = 'userstories/create_comentario_us.html'
+    model = Comentario
+    form_class = ComentarioUSForm
+    success_message = 'Se ha creado el Comentario'
+    
+    def get_context_data(self, **kwargs):
+        permisos=[]
+        user = self.request.user
+        permisos = user.get_permisos()
+        context = super().get_context_data(**kwargs)
+        context["permisos"] = permisos
+        us = UserStory.objects.get(pk=self.kwargs['pk'])
+        context["us_actual"] = us
+
+    
+        return context
+    def get_success_url(self):
+        us= UserStory.objects.filter(pk=self.kwargs['pk']).first()
+        us.estado = us.estado + 1
+        us.save()
+        us= UserStory.objects.filter(pk=self.kwargs['pk']).first()
+        print(us)
+        
+        return reverse('kanban_sprint', kwargs={'pk': self.object.userstory.sprint_id})
+    def get_form_kwargs(self):
+        kwargs = super(CreateComentarioUsBack, self).get_form_kwargs()
+        us = UserStory.objects.get(pk=self.kwargs['pk'])
+        kwargs['us'] =us # pasamos el backlog a los kwargs del formulario
+        return kwargs
+    def form_valid(self, form):
+        self.object 
+        self.object = form.save()
+        
         return HttpResponseRedirect(self.get_success_url())

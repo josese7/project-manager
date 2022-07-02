@@ -16,6 +16,30 @@
         <a href="{% url 'detail_backlog' object.backlog.pk %}"><button type="button" class="btn submit-btn">
             <i class="fas fa-arrow-left"></i> Atras</button></a>
         <hr>
+        <table class="table table-sm scrolltable" width="100%">
+            <thead class="thead-dark thead">
+                <tr>
+                    <th width="5%">ID</th>
+                    <th width="50%">Comentario</th>
+                    <th width="10%">Estado</th>
+                    <th width="10%">Autor</th>
+                    <th width="10%">Fecha</th>
+    
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                {% for comen in object.comentario_set.all %}
+                    <tr>
+                        <td width="5%">{{ comen.pk }}</td>
+                        <td width="50%">{{ comen.descripcion}}</td>
+                        <td width="10%">{{ comen.estado}}</td>
+                        <td width="10%">{{ comen.usuario}}</td>
+                        <td width="10%">{{ comen.fecha}}</td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
     {% else %}
     Acceso denegado.

@@ -11,6 +11,7 @@
     
     
     <script src="{% static '/js/bootstrap.min.js' %}"></script>
+    <script src="{% static '/js/jquery.min.js' %}"></script>
  
     <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
@@ -46,9 +47,74 @@
     </div>
     <div id="content">
         {% block content%}
+        
+
+       
+
+
         {% endblock%}
     </div>
 <body>
+
+    <div id="ventana_modal" class="modal fade" role="dialog"></div>
+
+    <script>
+
+
+        function abrir_modal(url)
+
+
+        {
+
+
+            $('#ventana_modal').load(url, function()
+
+
+            {
+
+
+            $(this).modal({
+
+
+                backdrop: 'static',
+
+
+                keyboard: false
+
+
+            })
+
+
+            $(this).modal('show');
+
+
+            });
+
+
+            return false;
+
+
+        }
+
+
+
+
+        function cerrar_modal()
+
+
+        {
+
+
+        $('#ventana_modal').modal('hide');
+
+
+        return false;
+
+
+        }
+
+
+    </script>
     
 </body>
 </html>

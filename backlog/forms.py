@@ -78,7 +78,7 @@ class UserStoryUpdateForm(forms.ModelForm):
         visualizacion del formulario
         """
         model = UserStory
-        fields = ('nombre', 'descripcion','usuarios')
+        fields = ('nombre', 'descripcion','usuarios', 'sprint')
 
 
 class ComentarioUSForm(forms.ModelForm):
@@ -99,6 +99,9 @@ class ComentarioUSForm(forms.ModelForm):
         #Set user field and estado field
         self.fields['usuario'].initial= us.usuarios
         self.fields['estado'].initial= ESTADOS_US[us.estado]
+        self.fields['usuario'].widget = forms.HiddenInput()
+      
+        
         
 
     class Meta:

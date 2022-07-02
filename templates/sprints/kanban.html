@@ -1,0 +1,103 @@
+{%include 'base.html'%}
+<html>
+<body>
+<div class="container">
+    {%if 'Desarrollo' in permisos %}
+    <div class="head">
+        <h1 align="center"> {{ object.nombre }} </h1>
+    </div>
+    
+
+    <table class="table table-sm scrolltable" width="100%">
+        <thead class="thead-dark thead">
+            <tr>
+                <th width="33%">Pendientes</th>
+                <th width="33%">En curso</th>
+                <th width="33%">Finalizado</th>
+
+            </tr>
+        </thead>
+        <tbody class="tbody">
+
+          <tr>
+              <td>
+                    {% for us in object_list%}
+
+                    {%if us.estado == 2%}    
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                              <h5 class="card-title">{{ us.nombre}}</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">{{ us.usuarios }}</h6>
+                              <p class="card-text">{{ us.descripcion }}</p>
+                              <div class="col d-flex justify-content-center">
+                                <a href="{% url 'comentar_userstory_next' us.pk %}" class="card-link"><i class="fa-solid fa-arrow-right-arrow-left"></i></a>
+                                <a href="#" class="card-link"><i class="fa-solid fa-info"></i></a>
+                              </div>
+                              
+                            </div>
+                          </div>
+                        </tr>
+                    {%endif%}
+
+
+                    {% endfor %}
+
+            </td>
+            <td>
+                {% for us in object_list%}
+
+                {%if us.estado == 0%}    
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                          <h5 class="card-title">{{ us.nombre}}</h5>
+                          <h6 class="card-subtitle mb-2 text-muted">{{ us.usuarios }}</h6>
+                          <p class="card-text">{{ us.descripcion }}</p>
+                          <div class="col d-flex justify-content-center">
+                            <a href="{% url 'comentar_userstory_next' us.pk %}" class="card-link"><i class="fa-solid fa-arrow-right-arrow-left"></i></a>
+                            <a href="#" class="card-link"><i class="fa-solid fa-info"></i></a>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    
+                {%endif%}
+
+
+                {% endfor %}
+
+            </td>
+            <td>
+              {% for us in object_list%}
+
+              {%if us.estado == 1%}    
+                  <div class="card" style="width: 18rem;">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ us.nombre}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ us.usuarios }}</h6>
+                        <p class="card-text">{{ us.descripcion }}</p>
+                        <div class="col d-flex justify-content-center">
+                          <a href="{% url 'comentar_userstory_next' us.pk %}" class="card-link"><i class="fa-solid fa-arrow-right-arrow-left"></i></a>
+                          <a href="#" class="card-link"><i class="fa-solid fa-info"></i></a>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  
+              {%endif%}
+
+
+              {% endfor %}
+
+            </td>
+        
+          </tr>
+        </tbody>
+
+    </table>
+
+    {% else %}
+    Acceso denegado
+    {% endif %}
+</div>
+</body>
+</html>

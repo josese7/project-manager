@@ -41,10 +41,14 @@ class ProyectoListView(ListView):
     def get_context_data(self, **kwargs):
         permisos=[]
         user = self.request.user
+
+        
+     
         permisos = user.get_permisos()
         
         context = super().get_context_data(**kwargs)
         context["permisos"] = permisos
+        context["path"] = self.request.path
 
         return context
 

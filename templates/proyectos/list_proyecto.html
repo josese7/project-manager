@@ -30,7 +30,11 @@
                     <div class="action-container">
                         <a href="{% url 'update_proyecto' proyecto.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
                         <a href="{% url 'delete_proyecto' proyecto.pk %}"><i class="fa-regular fa-trash-can"></i></a>
+                        {%if path == '/desarrollo/'%}
+                        <a href="{% url 'detail_backlog' proyecto.pk%}"><i class="fa-regular fa-eye"></i></a>
+                        {%else%}
                         <a href="{% url 'detail_proyecto' proyecto.pk %}"><i class="fa-regular fa-eye"></i></a>
+                        {%endif%}
                     </div>
                     
                 </td>

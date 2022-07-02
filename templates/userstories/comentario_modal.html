@@ -1,0 +1,59 @@
+
+
+<div class="modal-dialog modal-lg">
+
+
+    <div class="modal-content">
+
+
+
+
+    
+
+
+    <form role="form" action="{% url 'comentar_userstory' obj.pk %}" method="post"  class="form-inline">
+
+
+
+    <div class="panel panel-default">
+
+
+        <div class="panel-heading">
+
+
+            Cambiar de estado
+
+
+        </div>
+
+
+        <!-- /.panel-heading -->
+
+
+        <div class="panel-body">
+
+
+            {% csrf_token %} {{form.as_p}}
+
+
+            <button type="submit" class="btn btn-danger"><span class="fa fa-save"></span> Guardar</button>
+
+
+            <a href="{% url 'kanban_sprint' us_actual.sprint_id%}" class="btn btn-success"><span class="fa fa-undo"></span> Cancelar</a>
+
+
+        </div>
+
+
+    </div>
+
+
+</form>
+
+
+</div>
+
+
+</div> 
+
+

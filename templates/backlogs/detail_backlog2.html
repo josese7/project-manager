@@ -22,10 +22,11 @@
         </thead>
         <tbody class="tbody">
             {% for us in object.userstory_set.all %}
+                {% if not us.sprint%}
                 <tr>
                     <td width="10%">{{ us.pk }}</td>
                     <td width="27%">{{ us.nombre}}</td>
-                    <td width="27%">{{ us.descripcion}}</td>
+                    <td width="27%">{{ us.descripcion }}</td>
                     <td id="acciones" width="8%">
                        
                         <div class="">
@@ -39,9 +40,14 @@
                     </td>
                     <td width="3%"></td>
                 </tr>
+                {% endif%}
             {% endfor %}
+            
         </tbody>
     </table>
+    <a href="{% url 'list_sprints' pk %}"><button type="button" class="btn submit-btn">
+        <i class="fa-solid fa-list-check"></i> Ver Sprints</button></a>
+    
     {% else %}
     Acceso denegado
     {% endif %}

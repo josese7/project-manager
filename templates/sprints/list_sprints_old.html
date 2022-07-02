@@ -1,0 +1,45 @@
+{% extends "base.html"%}
+
+{% block title %} Backlogs {%endblock%}
+
+{% block content%}
+{% if 'Desarrollo' in permisos %}
+<table class="table table-sm scrolltable" width="100%">
+    <thead class="thead-dark thead">
+        <tr>
+            <th width="10%">ID</th>
+            <th width="25%">Nombre</th>
+            <th width="8%">Acciones</th>
+            <th width="3%">
+              
+                <a href="{% url 'create_sprint' object.pk %}"><i class="fas fa-plus-square"></i></a>
+          
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody class="tbody">
+        {% for backlog in object_list %}
+            <tr>
+                <td width="10%">{{ backlog.pk }}</td>
+                <td width="25%">{{ backlog.nombre }}</td>
+
+                <td id="acciones" width="8%">
+                    <div class="action-container">
+                        <a href="{% url 'update_backlog' backlog.pk %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="{% url 'detail_backlog' backlog.pk %}"><i class="fa-regular fa-eye"></i></a>
+                    </div>
+                    
+                </td>
+                <td width="3%"></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{%else%}
+Acceso denegado
+
+{% endif %}
+
+{%endblock%}
+

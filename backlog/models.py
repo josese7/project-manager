@@ -8,7 +8,7 @@ ASIGNADO = 1
 FINALIZADO = 0
 ESTADOS_US = (
     (PENDIENTE, 'Pendiente'),
-    (ASIGNADO, 'Asignado'),
+    (ASIGNADO, 'En curso'),
     (FINALIZADO,'Finalizado')
 )
 class UserStory(models.Model):
@@ -17,10 +17,17 @@ class UserStory(models.Model):
     backlog = models.ForeignKey(
         'Backlog',
         on_delete=models.CASCADE,
+        
     )
     usuarios =  models.ForeignKey(
         'usuarios.Usuario',
         on_delete=models.SET_NULL, null = True, default=None
+    )
+    sprint = models.ForeignKey(
+        'sprint.Sprint',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
     )
     
     estado = models.PositiveIntegerField(default=PENDIENTE, choices=ESTADOS_US) 

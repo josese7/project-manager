@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'usuarios',
     'fontawesomefree',
     'proyecto',
-    'backlog'
+    'backlog',
+    'sprint'
 ]
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
