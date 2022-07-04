@@ -2,7 +2,7 @@ from django.urls import path
 from django.views.generic import TemplateView
 from backlog.views import ListBacklogView, UpdateBacklogView, DetailBacklogView, CreateUserStoryView, UpdateUserStoryView, DeleteUserStoryView, UpdateUserStoryView, DetailUserStoryView, CreateComentarioUsNext, CreateComentarioUsBack
 from proyecto.views import ProyectoListView
-from sprint.views import ListSprintView, CreateSprintView, DetailSprintView, UpdateSprintView, iniciar_sprint, KanbanView
+from sprint.views import ListSprintView, CreateSprintView, DetailSprintView, UpdateSprintView, iniciar_sprint, KanbanView, terminar_sprint
 
 
 urlpatterns = [
@@ -21,7 +21,7 @@ urlpatterns = [
     path('detailSprint/<int:pk>/', DetailSprintView.as_view(), name='detail_sprint'),
     path('editSprint/<int:pk>/', UpdateSprintView.as_view(), name='update_sprint'),
     path('iniciarSprint/<int:pk>/', iniciar_sprint, name='iniciar_sprint'),
-    path('terminarSprint/<int:pk>/', iniciar_sprint, name='terminar_sprint'),
+    path('terminarSprint/<int:pk>/', terminar_sprint, name='terminar_sprint'),
     path('kanbanSprint/<int:pk>/', KanbanView.as_view(), name='kanban_sprint'),
 
 

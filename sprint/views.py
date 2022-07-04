@@ -15,7 +15,7 @@ from sprint.models import Sprint
 # Create your views here.
 
 
-
+ESTADOS_PROYECTO=['Pendiente', 'En curso', 'Terminado']
 
 
 @method_decorator(login_required, name='dispatch')
@@ -39,6 +39,7 @@ class ListSprintView(ListView):
         context["sprints"] = proyecto.sprint_set.all()
         context["proyecto"] = proyecto
         context["estado_sprint"] = ['Pendiente','En curso','Finalizado']
+        context["estado_proyecto"]= ESTADOS_PROYECTO[proyecto.estado]
         
 
 
@@ -148,13 +149,32 @@ def iniciar_sprint(request, pk):
     sprint = Sprint.objects.filter(pk=pk).first()
     sprint.estado = 1
     sprint.save()
-    return reverse('list_sprints',args=(self.kwargs['pk'],))
+
+    proyecto= sprint.proyecto
+    if proyecto.estado == 0:
+        proyecto.estado = 1
+        proyecto.save()
+
+    return HttpResponseRedirect(reverse('list_sprints', args=(sprint.proyecto.id,)))
 
 def terminar_sprint(request, pk):
     sprint = Sprint.objects.filter(pk=pk).first()
+    print(sprint.estado)
     sprint.estado = 2
     sprint.save()
-    return reverse('list_sprints',args=(self.kwargs['pk'],))
+
+    proyecto= sprint.proyecto
+    us= proyecto.backlog.userstory_set.all()
+    cont = 0
+    for u in us:
+        if u.estado == 1:
+            cont = cont +1
+        
+    if proyecto.estado == 1 and cont==0 :
+        proyecto.estado = 2
+        proyecto.save()
+
+    return HttpResponseRedirect(reverse('list_sprints',args=(sprint.proyecto.id,)))
 
 
 @method_decorator(login_required, name='dispatch')

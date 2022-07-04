@@ -37,6 +37,8 @@
     {%elif object.estado == 1 %}
     <a href="{% url 'kanban_sprint' pk %}"><button type="button" class="btn submit-btn">
         <i class="fa-solid fa-table-columns"></i> Tablero</button></a>
+    {%elif object.estado == 2%}
+        <p>Sprint terminado</p>
     {%else%}
         <p>Sin User Stories</p>
     {%endif%}
